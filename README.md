@@ -1,4 +1,4 @@
-# Docker excercise 2
+# Docker exercise 2
 
 This exercise tries to imitate some situation that you may experience when building through the source code with Docker.
 
@@ -32,6 +32,6 @@ Usted deberá buildear esta aplicación ejecutando el comando go build (go build
 
 Una vez se haya construido la imagen, dependiendo de cómo se hizo, puede ejecutar la imagen de docker de distintas maneras.
 Es recomendable que construya en el dockerfile el ejecutable y luego este sea añadido como entrypoint. Dado que el ejecutable levanta un servidor, usted puede realizar port-forward hacia su propia pc. En resumen, se le recomienda ejecutar de la siguiente forma el dockerfile:
-> docker run -p 8080:8080 -it hashing
+> docker run -p 8080:8080 -it exercise
 
 Usted al ejecutar lo enterior, obtendrá un output en su navegador ingresando a la ruta: http://localhost:8080. Si usted se encuentra en linux, también es posible que pueda ejecutar "wget http://localhost:8080" en su terminal. ¡Éxito!
