@@ -5,19 +5,19 @@ This exercise tries to imitate some situation that you may experience when build
 ## Build
 
 Prebuild: 
-You will need: git and build-essentials
+You will need: git and golang
  - On Debian based systems (Ubuntu, centos...):
-> $ sudo apt-get -yqq update && sudo apt-get -yqq git build-essential
+> $ sudo apt-get -yqq update && sudo apt-get -yqq git golang
 
 Building:
-> $ git clone https://github.com/Naikelin/docker-exercise1  \
-> $ cd docker-exercise1  \
-> $ make
+> $ git clone https://github.com/Naikelin/docker-exercise2  \
+> $ cd docker-exercise2  \
+> $ go build -o app server.go
 
 Run:
 
-> On folder directory where you did make  \
-> $ ./check 'someword'
+> On folder directory:  \
+> $ ./app
 
 If you built a docker:
 
@@ -26,13 +26,12 @@ If you built a docker:
 #Español:
 
 Ejercicio: 
-Usted deberá buildear esta aplicación ejecutando el comando 'make' (make construye un ejecutable para un archivo c). Este ejecutable recibe un argumento como una palabra. La idea es que construya esto en un docker y construya una imagen de docker funcional. Recuerde que para construir una imagen en docker deberá ejecutar en la carpeta donde tenga el Dockerfile (utilizando ubuntu como base):
+Usted deberá buildear esta aplicación ejecutando el comando go build (go build construye un ejecutable para un archivo golang). Este ejecutable levantará un server en localhost, puerto 8080. La idea es que construya una imagen de docker funcional. Recuerde que para construir una imagen en docker deberá ejecutar en la carpeta donde tenga el Dockerfile (utilizando ubuntu como base):
 
 > docker build -t exercise .
 
-Una vez se haya construido la imagen, deberá ejecutar el siguiente comando:
-> docker run -it hashing /bin/sh -c "cd /docker-exercise1 && ./check $(echo "ZG9ja2VyIC12Cg==" | base64 -d | sh | tr -s ' ' | cut -d ' ' -f 1)"
+Una vez se haya construido la imagen, dependiendo de cómo se hizo, puede ejecutar la imagen de docker de distintas maneras.
+Es recomendable que construya en el dockerfile el ejecutable y luego este sea añadido como entrypoint. Dado que el ejecutable levanta un servidor, usted puede realizar port-forward hacia su propia pc. En resumen, se le recomienda ejecutar de la siguiente forma el dockerfile:
+> docker run -p 8080:8080 -it hashing
 
-La ruta donde usted haga el *cd /docker-exercise1*  dependerá directamente de dónde usted haya generado el ejecutable del make. En este caso, se realizó el make en */docker-exercise1* con respecto a la raíz.
-
-Usted al ejecutar lo enterior, le dará como output un string. ¡Si usted ingresa ese string correctamente a canvas, tendrá la pregunta buena!
+Usted al ejecutar lo enterior, obtendrá un output en su navegador ingresando a la ruta: http://localhost:8080. Si usted se encuentra en linux, también es posible que pueda ejecutar "wget http://localhost:8080" en su terminal. ¡Éxito!
